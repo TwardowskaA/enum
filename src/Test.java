@@ -13,7 +13,13 @@ public class Test {
 
         try {
             Speed speed = Speed.valueOf(x); //pobranie enuma za pomoca scannera
-
+            Speed[] all = Speed.values();
+            for (Speed speed1 : all) { //wybranie opcji angielskiej lub polskiej 
+                if(speed1.name().equals(x)){
+                    speed = speed1;
+                    break;
+                }
+            }
             System.out.println("Wybrana wartość: " + speed);
             System.out.println(speed.speedValue + "kmh");
 
