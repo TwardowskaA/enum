@@ -10,20 +10,30 @@ public class Test {
         }
         System.out.println("Wybierz predkość:");
         String x = scan.nextLine();
+        x  = x.toUpperCase();
+
+        Speed speed = null;
 
         try {
-            Speed speed = Speed.valueOf(x); //pobranie enuma za pomoca scannera
+            speed = Speed.valueOf(x); //pobranie enuma za pomoca scannera
+
+        } catch (IllegalArgumentException e) {
+            //szukanie enuma po nazwie
             Speed[] all = Speed.values();
-            for (Speed speed1 : all) { //wybranie opcji angielskiej lub polskiej 
-                if(speed1.name().equals(x)){
+            speed = null;
+            for (Speed speed1 : all) { //wybranie opcji angielskiej lub polskiej
+                if (speed1.translation.equalsIgnoreCase(x)) {
                     speed = speed1;
                     break;
                 }
             }
+
+        }
+
+        if (speed != null) {
             System.out.println("Wybrana wartość: " + speed);
             System.out.println(speed.speedValue + "kmh");
-
-        } catch (IllegalArgumentException e) {
+        } else {
             System.out.println("Podana wartość jest nieprawidlowa");
         }
     }
